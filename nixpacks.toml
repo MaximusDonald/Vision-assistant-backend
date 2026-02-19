@@ -1,3 +1,13 @@
 ﻿[phases.setup]
-# Provide Python + FFmpeg runtime and dev pkg-config files for PyAV (av)
-nixPkgs = ["python311", "ffmpeg", "ffmpeg.dev", "pkg-config"]
+# Python + FFmpeg runtime for faster-whisper. pkg-config only needed if building av from source.
+nixPkgs = ["python311", "ffmpeg", "pkg-config"]
+
+[variables]
+PIP_PREFER_BINARY = "1"
+PIP_ONLY_BINARY = "av"
+
+[phases.install]
+cmds = [
+  "python -m pip install -U pip setuptools wheel",
+  "pip install -r requirements.txt"
+]
