@@ -1,0 +1,4 @@
+﻿[phases.setup]
+# FFmpeg provides the libav* libraries required by PyAV (av)
+# pkg-config helps the build find those libraries when wheels are unavailable
+nixPkgs = ["ffmpeg", "pkg-config"]
