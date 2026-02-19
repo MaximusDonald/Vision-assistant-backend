@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+*.egg
+*.whl
+*.pyd
+*.pyo
+*.pyc
+__pypackages__/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Runtime files
+logs/
+temp/
+*.log
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# ML artifacts
+models/
+*.pt
+*.pth
+*.onnx
+*.bin
+*.safetensors
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/

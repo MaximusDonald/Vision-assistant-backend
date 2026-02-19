@@ -1,0 +1,28 @@
+# === FastAPI ===
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+pydantic==2.6.3
+pydantic-settings==2.2.1
+
+# === Gemini ===
+google-generativeai==0.3.2
+
+# === Comparaison images ===
+imagehash==4.3.1
+pillow==10.2.0
+
+# === Voix ===
+faster-whisper==1.0.0
+edge-tts==6.1.10
+
+# === WebSocket ===
+websockets==12.0
+
+# === Utilitaires ===
+python-multipart==0.0.9
+python-magic==0.4.27; platform_system != "Windows"
+python-magic-bin==0.4.14; platform_system == "Windows"
+aiofiles==23.2.1
+python-dotenv==1.0.0
+numpy<2.0,>=1.23.0
+requests==2.31.0
