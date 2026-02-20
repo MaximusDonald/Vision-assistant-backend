@@ -3,7 +3,7 @@ Test rapide de la couche voix
 """
 import asyncio
 from pathlib import Path
-from app.models.model_loader import get_model_manager
+from app.models.whisper_loader import get_whisper_model
 from app.voice.speech_to_text import SpeechToText
 from app.voice.text_to_speech import TextToSpeech
 from app.voice.audio_processor import AudioProcessor
@@ -56,11 +56,11 @@ async def test_stt():
     
     # Chargement modèles
     print("\n🚀 Chargement Whisper...")
-    model_manager = get_model_manager()
-    model_manager.initialize()
+    model = get_whisper_model()
+    
     
     # Transcription
-    stt = SpeechToText(model_manager.whisper)
+    stt = SpeechToText(model)
     
     print(f"\n📝 Transcription: {test_audio.name}")
     text = stt.transcribe(test_audio, language="fr")

@@ -8,7 +8,7 @@ pydantic-settings==2.2.1
 google-generativeai==0.3.2
 
 # === Groq (Whisper API) ===
-groq==0.4.2
+groq==1.0.0
 httpx==0.27.0
 
 # === Comparaison images ===
