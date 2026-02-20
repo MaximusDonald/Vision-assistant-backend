@@ -1,6 +1,6 @@
 ﻿[phases.setup]
-# Python + FFmpeg runtime for faster-whisper. pkg-config only needed if building av from source.
-nixPkgs = ["python311", "ffmpeg", "pkg-config"]
+# Use python311Full to include pip, plus ffmpeg for audio decoding
+nixPkgs = ["python311Full", "ffmpeg", "pkg-config"]
 
 [variables]
 PIP_PREFER_BINARY = "1"
