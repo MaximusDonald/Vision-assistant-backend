@@ -12,7 +12,7 @@ imagehash==4.3.1
 pillow==10.2.0
 
 # === Voix ===
-faster-whisper==1.0.0
+openai-whisper==20231117 
 edge-tts==6.1.10
 
 # === WebSocket ===
