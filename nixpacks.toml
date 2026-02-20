@@ -4,6 +4,9 @@ nixPkgs = ["python311Full", "file"]
 
 [phases.install]
 cmds = [
+  "python -m venv /opt/venv",
+  ". /opt/venv/bin/activate",
+  "python -m ensurepip --upgrade",
   "python -m pip install -U pip setuptools wheel",
   "python -m pip install -r requirements.txt"
 ]
