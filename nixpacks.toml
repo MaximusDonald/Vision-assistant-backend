@@ -1,15 +1,12 @@
 ﻿[phases.setup]
-nixPkgs = ["python311Full", "ffmpeg"]
+# Python + libmagic (python-magic dependency on Linux)
+nixPkgs = ["python311Full", "file"]
 
 [phases.install]
 cmds = [
-  "python -m venv /opt/venv",
-  ". /opt/venv/bin/activate",
-  "pip install -r requirements.txt"
+  "python -m pip install -U pip setuptools wheel",
+  "python -m pip install -r requirements.txt"
 ]
 
 [start]
 cmd = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
-
-[variables]
-PIP_NO_BUILD_ISOLATION = "1"
