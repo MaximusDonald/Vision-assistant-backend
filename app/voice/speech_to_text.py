@@ -1,9 +1,8 @@
+﻿"""
+Transcription audio avec Groq Whisper API
 """
-Transcription audio avec OpenAI Whisper
-"""
-import whisper
 from pathlib import Path
-from typing import Optional
+from groq import Groq
 from app.utils.logger import setup_logger
 from app.utils.exceptions import ProcessingError
 
@@ -12,18 +11,18 @@ logger = setup_logger(__name__)
 
 class SpeechToText:
     """
-    Wrapper OpenAI Whisper
-    Transcrit audio en texte (français prioritaire)
+    Wrapper Groq Whisper API
+    Ultra rapide, pas de modèle local
     """
     
-    def __init__(self, model):
+    def __init__(self, client: Groq):
         """
         Initialise le transcripteur
         
         Args:
-            model: Instance Whisper pré-chargée
+            client: Client Groq pré-initialisé
         """
-        self.model = model
+        self.client = client
         self.logger = setup_logger(__name__)
     
     def transcribe(
@@ -42,16 +41,19 @@ class SpeechToText:
             Texte transcrit
         """
         try:
-            self.logger.info(f"🎤 Transcription: {audio_path.name}")
+            self.logger.info(f"🎤 Transcription Groq: {audio_path.name}")
             
-            # Transcription
-            result = self.model.transcribe(
-                str(audio_path),
-                language=language,
-                fp16=False  # CPU mode
-            )
+            # Lecture fichier
+            with open(audio_path, "rb") as audio_file:
+                # Transcription via Groq
+                transcription = self.client.audio.transcriptions.create(
+                    file=audio_file,
+                    model="whisper-large-v3",
+                    language=language,
+                    response_format="json"
+                )
             
-            text = result["text"].strip()
+            text = transcription.text.strip()
             
             if not text:
                 self.logger.warning("⚠️ Aucun texte détecté dans l'audio")
@@ -72,23 +74,20 @@ class SpeechToText:
             audio_path: Chemin vers le fichier audio
             
         Returns:
-            Code langue détecté (fr, en, etc.)
+            Code langue détecté
         """
         try:
-            # Load audio and pad/trim it to fit 30 seconds
-            audio = whisper.load_audio(str(audio_path))
-            audio = whisper.pad_or_trim(audio)
-
-            # Make log-Mel spectrogram and move to the same device as the model
-            mel = whisper.log_mel_spectrogram(audio).to(self.model.device)
-
-            # Detect the spoken language
-            _, probs = self.model.detect_language(mel)
-            detected_language = max(probs, key=probs.get)
+            with open(audio_path, "rb") as audio_file:
+                transcription = self.client.audio.transcriptions.create(
+                    file=audio_file,
+                    model="whisper-large-v3",
+                    response_format="json"
+                )
             
+            detected_language = transcription.language or "fr"
             self.logger.info(f"🌍 Langue détectée: {detected_language}")
             return detected_language
             
         except Exception as e:
             self.logger.error(f"❌ Erreur détection langue: {e}")
-            return "fr"  # Fallback français
+            return "fr"  # Fallback

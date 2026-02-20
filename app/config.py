@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     GEMINI_MAX_TOKENS: int = 2048
     GEMINI_TEMPERATURE: float = 0.7
     
+    # === GROQ (Whisper API) ===
+    GROQ_API_KEY: str = ""  # ✅ NOUVEAU
+    
     # === STREAM ===
     STREAM_FPS: int = 2
     FRAME_DIFF_THRESHOLD: int = 10
