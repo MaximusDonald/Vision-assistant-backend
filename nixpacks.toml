@@ -1,6 +1,6 @@
 ﻿[phases.setup]
-# Python + libmagic (required by python-magic)
-nixPkgs = ["python311Full", "libmagic"]
+# Python + file (libmagic) for python-magic if available
+nixPkgs = ["python311Full", "file"]
 
 [phases.install]
 cmds = [
