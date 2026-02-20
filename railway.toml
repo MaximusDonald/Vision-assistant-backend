@@ -11,10 +11,3 @@ restartPolicyMaxRetries = 3
 
 [env]
 PYTHONUNBUFFERED = 1
-```
-
----
-
-### **`Procfile`** (optionnel, Railway utilise railway.toml)
-```
-web: uvicorn app.main:app --host 0.0.0.0 --port $PORT
