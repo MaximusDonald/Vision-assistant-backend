@@ -34,7 +34,6 @@ uploads/*
 !uploads/.gitkeep
 
 # ML artifacts
-models/
 *.pt
 *.pth
 *.onnx
